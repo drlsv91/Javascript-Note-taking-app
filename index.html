@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Javascript CRUD App</title>
+    <meta name="view-port" content="width=device-width, initial-scale=1.0">
+    
+ 
+    
+    <style>
+/* #faf6bd */
+.container{
+    background-color: #faf6bdc2;
+    width: 60%;
+    margin: 0 auto;
+    padding: 5rem;
+    margin-top: 2rem;
+}
+        *{margin: 0px;padding: 0px;}
+        .heading{
+        color: #141518;
+        background: #f9ec39;
+        text-transform: uppercase;
+        padding: 20px;
+        font-size: 16px;
+        letter-spacing: 1px;
+        margin-bottom: 50px;
+        }
+        .btn, .form-control{
+          border-radius: 0px;
+          width:100%;
+        }
+        p{color:#141518;
+        font-size: 1.5rem;
+        font-weight: bolder;
+        }
+        .btnSpan{
+            margin: 0 1rem 0 1rem;
+        }
+        .btn0{
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .read {
+            background-color: transparent;
+            border: none;
+            width: 50%;
+        }
+        .form{
+            border: none;
+            background-color: #f9ec39;
+            width: 70%;
+            height: 2rem;
+        }
+        .addBtn{
+            border: none;
+            padding: .5rem;
+            border-radius: .3rem;
+            background-color: #80808030;
+            cursor: pointer;
+        }
+        .display{
+           
+            margin: 1.2rem 0 1.2rem 0;
+        }
+        input[type="text"]{
+            font-size: 1.2rem;
+        }
+        *:focus{
+            outline: none;
+        }
+
+        </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="heading">Note taking  app</h2>
+    <div class="addNote">
+      <div class="add">
+          <input type="text" class="form" id="data">
+        <span class="form-submit">
+          <button type="button" class="addBtn" id="addNote" onclick="addNote();">Add Note</button>
+        </span>
+      </div>
+      <div class="display">
+          <p>Notes</p>
+
+      </div>
+      <div class="note" id="noteList">
+      </div>
+    </div>
+    </div>
+    <script>
+
+        var data = document.getElementById('data');
+        var noteList = document.getElementById('noteList');
+        
+        // add note code
+        var counter = 0;
+        function addNote(){
+          var inputdata = document.getElementById('data').value;
+          var html =  '<div class="note-container" id="data'+counter+'" style="margin-bottom:15px;">'+
+            //container
+              '<input type="text" class="read" value="'+inputdata+'" disabled>'+//read class
+        
+            '<span class="btnSpan">'+ //btnSpan class
+              '<button type="button" class="editBtn btn0" onclick="edit(this.id)" id="edit'+counter+'">Edit</button>'+//editBtn
+            '</span>'+
+        
+            '<span class="btnSpan">'+
+              '<button type="button" class="updateBtn btn0" onclick="update(this.id)" id="update'+counter+'">Update</button>'+//updateBtn
+            '</span>'+
+            '<span class="btnSpan">'+
+              '<button type="button" class="deleteBtn btn0" onclick="remove(this.id)" id="delete'+counter+'">Delete</button>'+
+            '</span>'+
+          '</div>';
+       
+          document.getElementById('noteList').insertAdjacentHTML('beforeend', html);
+            counter++;
+            document.getElementById('data').value ="";
+
+        
+        }
+        
+        function edit(editId){
+          var parent =   document.getElementById(editId).parentNode.parentNode;
+          var child = parent.firstChild;
+          child.removeAttribute('disabled');
+        }
+        
+        function update(updateId){
+          var parent =   document.getElementById(updateId).parentNode.parentNode;
+          var child = parent.firstChild;
+          child.setAttribute("disabled",'disabled');
+         
+        }
+        
+        function remove(deleteId){
+          var parent =   document.getElementById(deleteId).parentNode.parentNode;
+          parent.remove();
+         
+        }
+        </script>
+  </body>
+</html>
